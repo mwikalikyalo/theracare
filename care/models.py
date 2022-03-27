@@ -21,7 +21,7 @@ class Client(models.Model):
 # Create your models here.
 class Therapist(models.Model):
   # image = models.ImageField()
-  id= models.IntegerField()
+  id= models.IntegerField(primary_key=True)
   name = models.CharField(max_length= 200)
   age = models.CharField(max_length=1000)
   gender= models.CharField(max_length=300)
