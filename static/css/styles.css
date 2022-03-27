@@ -15,7 +15,7 @@ body, html {
   }
   .bg-image {
     /* The image used */
-    background-image: url("../images/gala.jpg");
+    background-image: url("../images/artem-maltsev-0CvHQ62gwY8-unsplash.jpg");
   
     /* Add the blur effect */
     filter: blur(4px);
