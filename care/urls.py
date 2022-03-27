@@ -4,6 +4,6 @@ from django.conf import settings
 from . import views
 
 urlpatterns=[
-    path('client/',views.clientApi, names="clientapi"),
-    path('therapist/',views.therapistApi, names="therapistApi"),
+    path('client/',views.clientApi, name="clientapi"),
+    path('therapist/',views.therapistApi, name="therapistApi"),
 ]
