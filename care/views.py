@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
-from .models import Departments,Employees, Therapist
-from .serializers import DepartmentSerializer,EmployeeSerializer
+from .models import Client, Therapist
+from .serializers import ClientSerializer,TherapistSerializer
 
 from django.core.files.storage import default_storage
 
@@ -11,7 +11,7 @@ from django.core.files.storage import default_storage
 @csrf_exempt
 def clientApi(request,id=0):
     if request.method=='GET':
-        clients = Clients.objects.all()
+        clients = Client.objects.all()
         client_serializer = ClientSerializer(clients, many=True)
         return JsonResponse(client_serializer.data, safe=False)
 
@@ -25,15 +25,15 @@ def clientApi(request,id=0):
     
     elif request.method=='PUT':
         client_data = JSONParser().parse(request)
-        clients=Clients.objects.get(ClientId=client_data['ClientId'])
-        client_serializer=ClientSerializer(client,data=client_data)
+        clients=Client.objects.get(ClientId=client_data['ClientId'])
+        client_serializer=ClientSerializer(clients,data=client_data)
         if client_serializer.is_valid():
             client_serializer.save()
             return JsonResponse("Updated Successfully!!", safe=False)
         return JsonResponse("Failed to Update.", safe=False)
 
     elif request.method=='DELETE':
-        clients=Clients.objects.get(ClientId=id)
+        clients=Client.objects.get(ClientId=id)
         clients.delete()
         return JsonResponse("Deleted Succeffully!!", safe=False)
 
