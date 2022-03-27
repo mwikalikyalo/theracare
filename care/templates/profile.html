@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<div class="container-fluid">
+    <div class="container-lg" id="contentWrapper">
+        <div class="row mt-5">
+            <div id="main" class="col-lg-8 col-12 my-4">
+                <div class="container">
+                  <div class="d-flex justify-content-around position-relative profile">
+                     
+                     <div class="mt-5">
+                         <p>{{current_user.username}}</p> 
+                         <p><p><strong>Projects</strong></p></p>
+                         <br>
+                          <p>
+                            {% autoescape on %}
+                            {{profile.bio| safe}}
+                           {% endautoescape %}
+                         </p>
+                     </div>
+                 </div>
+
+              </div>   
+         </div>       
+     </div>           
+  </div>                
+      {% endfor %}
+</div>
+
+{% endblock %}
