@@ -1,0 +1,40 @@
+{% load bootstrap5 %}
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if title %}
+  <title> TheraCare - {{title}}</title>
+  {% else %}
+    <title> TheraCare </title>
+    {{form.media}} 
+  {% endif %}
+  {% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">{% endblock %}
+
+</head>
+<body>
+  {% include 'navbar.html' %}
+    {% block content %} 
+    
+    {%endblock%}
+
+    {% block scripts %}
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      var myModal = document.getElementById('myModal')
+      var myInput = document.getElementById('myInput')
+
+      myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+      })
+    </script>
+    {% bootstrap_javascript %}
+
+    {% endblock %}
+</body>
+</html>
