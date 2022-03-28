@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-header">
+      {{ therapist.name }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ therapist.experience }}</h5>
+      <p class="card-text">{{ therapist.age }}</p>
+      <p class="card-text">{{ therapist.email }}</p>
+      <h6 class="card-text">{{ therapist.speciality }}</h6>
+      <a href="#" class="btn btn-warning">Book Session</a>
+    </div>
+    <div class="card-footer text-muted">
+      Feel free to email the therapist.
+    </div>
+  </div>
+{% endblock %}

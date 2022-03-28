@@ -19,9 +19,9 @@ class Client(models.Model):
         self.delete()
       
   def __str__(self) -> str:
-    return self.location_name
+    return self.name
+    
 
-# Create your models here.
 class Therapist(models.Model):
   # image = models.ImageField()
   id= models.IntegerField(primary_key=True)
