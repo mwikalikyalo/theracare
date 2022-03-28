@@ -1,0 +1,23 @@
+
+  
+{% extends "base.html" %}
+
+{% block title %}Account Activation{% endblock %}
+
+{% block content %}
+<section id="body" class="pt-5 mb-5">
+    <div class="container-xl pt-4">
+        <div class="pitches row mt-5 mx-0 justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8">
+                <div class="pitch-card px-3 py-5 bg-white shadow">
+                    <h1>Activation Error</h1>
+                    <p>
+                        Sorry, it didn't work. Either your activation link was wrong, or the key has expired; activation
+                        keys only last {{ expiration_days|apnumber }} days.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

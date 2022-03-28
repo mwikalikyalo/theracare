@@ -1,0 +1,19 @@
+
+  
+{% extends "base.html" %
+{% block title %}Account Activation{% endblock %}
+
+{% block content %}
+<section id="body" class="pt-5 mb-5">
+    <div class="container-xl pt-4">
+        <div class="pitches row mt-5 mx-0 justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8">
+                <div class="pitch-card px-3 py-5 bg-white shadow">
+                    <h1 class="fw-bold mb-3">Account Activated</h1>
+                    <p>Thanks for signing up! Now you can go ahead and <a class="fw-bold" href="{% url 'login' %}">log in</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
