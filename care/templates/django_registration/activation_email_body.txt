@@ -1,0 +1,12 @@
+{% autoescape off %}
+Hi {{ user.full_name }}, welcome to the TheraCare!
+
+To finalize your account, just visit the address below. (If it's not a link, you can copy and paste it into your web browser's address bar.)
+
+https://{{ site.domain }}/accounts/activate/{{ activation_key }}/
+
+The link expires in {{ expiration_days }} day{{ expiration_days|pluralize }}.
+
+If you didn't sign up for an account, just ignore this message: we won't email you again, 
+and the person who said this was their email won't be able to verify their account.
+{% endautoescape %}
