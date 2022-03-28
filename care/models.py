@@ -37,7 +37,8 @@ class Therapist(models.Model):
 
   @classmethod
   def update_therapist(cls, id, value):
-        therapist = cls.objects.filter(id=id).update(name=value)
+        therapist = cls.objects.filter(id=id).update(value=value)
+        return therapist
 
   @classmethod
   def get_therapist_by_id(cls, id):
@@ -45,7 +46,7 @@ class Therapist(models.Model):
         return therapist
 
   @classmethod
-  def search_by_category(cls, category):
+  def search_by_therapist(cls, therapist):
         therapist = cls.objects.filter(therapist__name__icontains=therapist)
         return therapist
 
