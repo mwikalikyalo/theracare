@@ -36,6 +36,13 @@ def create_profile(request):
 
     return render(request,'create_profile.html',{"form":form})
 
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user = request.user
+    profile =Profile.objects.get(user=current_user)
+
+    return render(request,'profile.html',{"profile":profile})
+
 
 @csrf_exempt
 def clientApi(request,id=0):
