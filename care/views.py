@@ -44,7 +44,23 @@ def profile(request):
     return render(request,'profile.html',{"profile":profile})
 
 
+@login_required(login_url='/accounts/login/')
+def find(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        searchresults = Therapist.searchtherapist(search_term)
+        return render(request, 'find.html', {'searchresults': searchresults, 'search_term': search_term})
+    else:
+        return redirect('home')
 
+def searchajax(request):
+    search_term = request.GET.get('search')
+    searchresults = Therapist.searchtherapist(search_term)
+    data = {
+        'searchresults':searchresults,
+        'search_term':search_term
+    }
+    return JsonResponse(data)
 
 @csrf_exempt
 def clientApi(request,id=0):

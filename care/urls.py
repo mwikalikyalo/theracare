@@ -6,6 +6,8 @@ from . import views
 urlpatterns=[
     path('',views.home, name="home"),
     path('create/profile/',views.create_profile, name='create_profile'),
+    path('profile/', views.profile, name='profile'),
+    path('find/', views.find, name='search'),
     path('client/',views.clientApi, name="clientapi"),
     path('therapist/',views.therapistApi, name="therapistApi"),
 ]
