@@ -44,6 +44,8 @@ def profile(request):
     return render(request,'profile.html',{"profile":profile})
 
 
+
+
 @csrf_exempt
 def clientApi(request,id=0):
     if request.method=='GET':
