@@ -1,13 +1,21 @@
+from cProfile import Profile
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
-from .models import Client, Therapist
+from .models import Client, Therapist, Profile
 from .serializers import ClientSerializer,TherapistSerializer
-
 from django.core.files.storage import default_storage
 
+
 # Create your views here.
+def home(request):
+    clients = Client.objects.all()
+    therapist = Therapist.objects.all()
+    profile = Profile.objects.all()
+    return render(request, 'home.html', {'clients':clients, 'therapist':therapist, 'profile':profile})
+
+
 @csrf_exempt
 def clientApi(request,id=0):
     if request.method=='GET':
