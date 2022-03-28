@@ -8,6 +8,7 @@ urlpatterns=[
     path('create/profile/',views.create_profile, name='create_profile'),
     path('profile/', views.profile, name='profile'),
     path('find/', views.find, name='search'),
+    path('therapy/', views.therapy, name='profile'),
     path('client/',views.clientApi, name="clientapi"),
     path('therapist/',views.therapistApi, name="therapistApi"),
 ]

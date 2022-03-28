@@ -8,6 +8,7 @@ from .serializers import ClientSerializer,TherapistSerializer
 from django.core.files.storage import default_storage
 from .forms import ClientForm,ProfileForm,TherapistForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -44,18 +45,49 @@ def profile(request):
     return render(request,'profile.html',{"profile":profile})
 
 
+@login_required(login_url='/accounts/login')
+def therapy(request):
+    print(request.GET)
+    if request.method == 'POST':
+        print(request.POST)
+        clientform = ClientForm(request.POST or None, instance=request.user)
+        profileform = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        therapistform = TherapistForm(request.POST)
+  
+
+        if clientform.is_valid and profileform.is_valid():
+            clientform.save()
+            profileform.save()
+            messages.success(request, 'You can now book a session')
+
+        return redirect('home')
+        
+    current_user = Profile.objects.get(username=request.user)
+    clientform = ClientForm(instance=request.user)
+    profileform = ProfileForm(instance=request.user.profile)
+    therapistform = TherapistForm()
+   
+    params = {
+        'current_user': current_user,
+        'clientform': clientform,
+        'profileform': profileform,
+        'therapistform': therapistform,
+    }
+    return render(request, 'therapist.html', params)
+
+
 @login_required(login_url='/accounts/login/')
 def find(request):
     if 'search' in request.GET and request.GET['search']:
         search_term = request.GET.get('search')
-        searchresults = Therapist.searchtherapist(search_term)
+        searchresults = Therapist.search_by_therapist(search_term)
         return render(request, 'find.html', {'searchresults': searchresults, 'search_term': search_term})
     else:
         return redirect('home')
 
 def searchajax(request):
     search_term = request.GET.get('search')
-    searchresults = Therapist.searchtherapist(search_term)
+    searchresults = Therapist.search_by_therapist(search_term)
     data = {
         'searchresults':searchresults,
         'search_term':search_term
