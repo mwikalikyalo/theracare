@@ -1,12 +1,13 @@
 from cProfile import Profile
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from .models import Client, Therapist, Profile
 from .serializers import ClientSerializer,TherapistSerializer
 from django.core.files.storage import default_storage
-
+from .forms import ClientForm,ProfileForm,TherapistForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -14,6 +15,26 @@ def home(request):
     therapist = Therapist.objects.all()
     profile = Profile.objects.all()
     return render(request, 'home.html', {'clients':clients, 'therapist':therapist, 'profile':profile})
+
+
+@login_required(login_url='/accounts/login/')
+def create_profile(request):
+    current_user = request.user
+    
+    if request.method=='POST':
+        form = ProfileForm(request.POST,request.FILES)
+        if request.current_user.is_authenticated:
+            form.instance.user = request.user
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+
+            profile.save()
+        return redirect('home')
+    else:
+        form=ProfileForm()
+
+    return render(request,'create_profile.html',{"form":form})
 
 
 @csrf_exempt
